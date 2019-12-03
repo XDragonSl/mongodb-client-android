@@ -2,6 +2,8 @@ package com.dd.mdbc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import com.dd.mdbc.ui.main.AddDBFragment
 import com.dd.mdbc.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +16,10 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
+    }
+
+    fun openDialog(view: View) {
+        AddDBFragment.display(supportFragmentManager)
     }
 
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="connection_placeholder">URI de conexión</string>
+    <string name="db_name_placeholder">Nombre de DB</string>
+    <string name="action_add">Añadir</string>
+    <string name="add_db_title">Nueva DB</string>
+</resources>

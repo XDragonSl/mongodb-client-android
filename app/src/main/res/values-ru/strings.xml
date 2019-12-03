@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="connection_placeholder">URI подключения</string>
+    <string name="db_name_placeholder">Имя БД</string>
+    <string name="action_add">Добавить</string>
+    <string name="add_db_title">Новая БД</string>
+</resources>
