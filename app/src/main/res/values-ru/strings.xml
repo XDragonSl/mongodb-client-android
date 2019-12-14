@@ -2,8 +2,11 @@
 <resources>
     <string name="connection_placeholder">URI подключения</string>
     <string name="db_name_placeholder">Имя БД</string>
-    <string name="action_add">Добавить</string>
-    <string name="add_db_title">Новая БД</string>
+    <string name="action_confirm">Добавить</string>
+    <string name="db_dialog_title">Подключение к БД</string>
     <string name="edit_button">Изменить</string>
     <string name="remove_button">Удалить</string>
+    <string name="confirm_title">Удалить БД</string>
+    <string name="confirm_message">Вы уверены?</string>
+    <string name="confirm_cancel">Отмена</string>
 </resources>

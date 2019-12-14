@@ -6,7 +6,7 @@
 
         <variable
             name="adbViewModel"
-            type="com.dd.mdbc.ui.main.AddDbViewModel" />
+            type="com.dd.mdbc.ui.main.DbDialogViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

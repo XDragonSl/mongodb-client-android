@@ -5,15 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dd.mdbc.DBAdapter
+import com.dd.mdbc.DbAdapter
 import com.dd.mdbc.R
 import kotlinx.android.synthetic.main.main_fragment.*
 
-class MainFragment : Fragment(), AddDBFragment.Companion.DialogListener {
+class MainFragment : Fragment(), DbDialogFragment.Companion.DialogListener {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -39,12 +38,12 @@ class MainFragment : Fragment(), AddDBFragment.Companion.DialogListener {
         super.onResume()
     }
 
-    override fun onDialogDismissed(dialogFragment: DialogFragment) {
+    override fun onDialogDismissed() {
         loadDBs()
     }
 
     private fun loadDBs() {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        recycler_view.adapter = DBAdapter(sharedPref.all.toList(), R.layout.db_item, context!!)
+        recycler_view.adapter = DbAdapter(sharedPref.all.toList(), R.layout.db_item, context!!)
     }
 }

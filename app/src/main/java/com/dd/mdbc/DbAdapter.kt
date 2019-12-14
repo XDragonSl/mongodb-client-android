@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class DBAdapter(
+class DbAdapter(
     private val dbs: List<Pair<String, Any?>>,
     private val rowLayout: Int,
     val context: Context
-) : RecyclerView.Adapter<DBAdapter.DBViewHolder>() {
+) : RecyclerView.Adapter<DbAdapter.DBViewHolder>() {
 
     class DBViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.title)

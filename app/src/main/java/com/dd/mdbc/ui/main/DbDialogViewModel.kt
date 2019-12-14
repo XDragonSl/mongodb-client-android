@@ -5,7 +5,7 @@ import androidx.databinding.Bindable
 import androidx.lifecycle.ViewModel
 import com.dd.mdbc.BR
 
-class AddDbViewModel : ViewModel() {
+class DbDialogViewModel : ViewModel() {
 
     class DBInfo : BaseObservable() {
 
@@ -21,7 +21,9 @@ class AddDbViewModel : ViewModel() {
                 field = value
                 notifyPropertyChanged(BR.adbViewModel)
             }
+
+        var preferenceKey: String = dbName
     }
 
-    val dbInfo = DBInfo()
+    var dbInfo = DBInfo()
 }

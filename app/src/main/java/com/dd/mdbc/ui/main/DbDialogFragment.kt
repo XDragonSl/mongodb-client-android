@@ -11,18 +11,19 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import com.dd.mdbc.R
-import com.dd.mdbc.databinding.AddDbFragmentBinding
+import com.dd.mdbc.databinding.DbDialogFragmentBinding
 import kotlinx.android.synthetic.main.dialog_toolbar.*
 
-class AddDBFragment : DialogFragment() {
+class DbDialogFragment(private var dbInfo: DbDialogViewModel.DBInfo) : DialogFragment() {
 
-    private lateinit var viewModel: AddDbViewModel
-    private lateinit var binding: AddDbFragmentBinding
+    private lateinit var viewModel: DbDialogViewModel
+    private lateinit var binding: DbDialogFragmentBinding
     private lateinit var dialogListener: DialogListener
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AddDbViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(DbDialogViewModel::class.java)
+        viewModel.dbInfo = dbInfo
         binding.adbViewModel = viewModel
         dialogListener = activity as DialogListener
     }
@@ -46,7 +47,7 @@ class AddDBFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding = DataBindingUtil.inflate(inflater, R.layout.add_db_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.db_dialog_fragment, container, false)
         return binding.root
     }
 
@@ -57,7 +58,12 @@ class AddDBFragment : DialogFragment() {
             setNavigationOnClickListener { dismiss() }
             setOnMenuItemClickListener {
                 with(sharedPref.edit()) {
-                    putString(viewModel.dbInfo.dbName, viewModel.dbInfo.connectionURI)
+                    if (viewModel.dbInfo.dbName != "" && viewModel.dbInfo.connectionURI != "") {
+                        if (viewModel.dbInfo.preferenceKey != "") {
+                            remove(viewModel.dbInfo.preferenceKey)
+                        }
+                        putString(viewModel.dbInfo.dbName, viewModel.dbInfo.connectionURI)
+                    }
                     commit()
                 }
                 dismiss()
@@ -68,7 +74,7 @@ class AddDBFragment : DialogFragment() {
     }
 
     override fun onDismiss(dialog: DialogInterface) {
-        dialogListener.onDialogDismissed(this)
+        dialogListener.onDialogDismissed()
         super.onDismiss(dialog)
     }
 
@@ -77,11 +83,14 @@ class AddDBFragment : DialogFragment() {
         private const val TAG = "Add_DB_Fragment"
 
         interface DialogListener {
-            fun onDialogDismissed(dialogFragment: DialogFragment)
+            fun onDialogDismissed()
         }
 
-        fun display(fragmentManager: FragmentManager): AddDBFragment {
-            val addDBFragment = AddDBFragment()
+        fun display(
+            fragmentManager: FragmentManager,
+            dbInfo: DbDialogViewModel.DBInfo
+        ): DbDialogFragment {
+            val addDBFragment = DbDialogFragment(dbInfo)
             addDBFragment.show(fragmentManager, TAG)
             return addDBFragment
         }
