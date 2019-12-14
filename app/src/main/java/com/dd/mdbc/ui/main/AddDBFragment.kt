@@ -2,7 +2,6 @@ package com.dd.mdbc.ui.main
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +54,6 @@ class AddDBFragment : DialogFragment() {
             setNavigationOnClickListener { dismiss() }
             setOnMenuItemClickListener {
                 with(sharedPref.edit()) {
-                    Log.i(viewModel.dbInfo.dbName, viewModel.dbInfo.connectionURI)
                     putString(viewModel.dbInfo.dbName, viewModel.dbInfo.connectionURI)
                     commit()
                 }

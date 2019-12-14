@@ -4,4 +4,6 @@
     <string name="db_name_placeholder">Nombre de DB</string>
     <string name="action_add">Añadir</string>
     <string name="add_db_title">Nueva DB</string>
+    <string name="edit_button">Editar</string>
+    <string name="remove_button">Eliminar</string>
 </resources>

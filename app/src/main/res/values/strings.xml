@@ -4,4 +4,6 @@
     <string name="connection_placeholder" translatable="true">Connection URI</string>
     <string name="action_add">Add</string>
     <string name="add_db_title">New DB</string>
+    <string name="edit_button">Edit</string>
+    <string name="remove_button">Remove</string>
 </resources>
