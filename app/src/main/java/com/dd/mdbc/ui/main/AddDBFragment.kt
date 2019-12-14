@@ -1,6 +1,7 @@
 package com.dd.mdbc.ui.main
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +18,13 @@ class AddDBFragment : DialogFragment() {
 
     private lateinit var viewModel: AddDbViewModel
     private lateinit var binding: AddDbFragmentBinding
+    private lateinit var dialogListener: DialogListener
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AddDbViewModel::class.java)
         binding.adbViewModel = viewModel
+        dialogListener = activity as DialogListener
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,9 +67,18 @@ class AddDBFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        dialogListener.onDialogDismissed(this)
+        super.onDismiss(dialog)
+    }
+
     companion object {
 
         private const val TAG = "Add_DB_Fragment"
+
+        interface DialogListener {
+            fun onDialogDismissed(dialogFragment: DialogFragment)
+        }
 
         fun display(fragmentManager: FragmentManager): AddDBFragment {
             val addDBFragment = AddDBFragment()

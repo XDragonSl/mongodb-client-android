@@ -1,23 +1,29 @@
 package com.dd.mdbc
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import com.dd.mdbc.ui.main.AddDBFragment
 import com.dd.mdbc.ui.main.MainFragment
-import kotlinx.android.synthetic.main.db_item.view.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AddDBFragment.Companion.DialogListener {
+
+    lateinit var mainFragment: MainFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
+            mainFragment = MainFragment.newInstance()
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, mainFragment)
                 .commitNow()
         }
+    }
+
+    override fun onDialogDismissed(dialogFragment: DialogFragment) {
+        mainFragment.onDialogDismissed(dialogFragment)
     }
 
     fun onClick(view: View) {
@@ -26,13 +32,10 @@ class MainActivity : AppCompatActivity() {
                 AddDBFragment.display(supportFragmentManager)
             }
             R.id.db_card -> {
-                Log.i("SelectButton: ", view.title.text.toString())
             }
             R.id.db_edit -> {
-                Log.i("EditButton: ", (view.parent as View).title.text.toString())
             }
             R.id.db_remove -> {
-                Log.i("RemoveButton: ", (view.parent as View).title.text.toString())
             }
         }
     }
