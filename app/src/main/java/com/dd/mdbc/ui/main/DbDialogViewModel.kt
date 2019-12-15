@@ -13,13 +13,13 @@ class DbDialogViewModel : ViewModel() {
         var dbName: String = ""
             set(value) {
                 field = value
-                notifyPropertyChanged(BR.adbViewModel)
+                notifyPropertyChanged(BR.dbDialogViewModel)
             }
         @get:Bindable
         var connectionURI: String = ""
             set(value) {
                 field = value
-                notifyPropertyChanged(BR.adbViewModel)
+                notifyPropertyChanged(BR.dbDialogViewModel)
             }
 
         var preferenceKey: String = dbName

@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dd.mdbc.DbAdapter
+import com.dd.mdbc.adapters.DbAdapter
 import com.dd.mdbc.R
 import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.progress_indicator.*
 
 class MainFragment : Fragment(), DbDialogFragment.Companion.DialogListener {
 
@@ -44,6 +45,11 @@ class MainFragment : Fragment(), DbDialogFragment.Companion.DialogListener {
 
     private fun loadDBs() {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        recycler_view.adapter = DbAdapter(sharedPref.all.toList(), R.layout.db_item, context!!)
+        progress_indicator.visibility = View.INVISIBLE
+        recycler_view.adapter = DbAdapter(
+            sharedPref.all.toList(),
+            R.layout.db_item,
+            context!!
+        )
     }
 }

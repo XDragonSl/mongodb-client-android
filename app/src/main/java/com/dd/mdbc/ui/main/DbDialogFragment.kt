@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import com.dd.mdbc.R
 import com.dd.mdbc.databinding.DbDialogFragmentBinding
-import kotlinx.android.synthetic.main.dialog_toolbar.*
+import kotlinx.android.synthetic.main.db_dialog_fragment.*
 
 class DbDialogFragment(private var dbInfo: DbDialogViewModel.DBInfo) : DialogFragment() {
 
@@ -24,7 +24,7 @@ class DbDialogFragment(private var dbInfo: DbDialogViewModel.DBInfo) : DialogFra
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(DbDialogViewModel::class.java)
         viewModel.dbInfo = dbInfo
-        binding.adbViewModel = viewModel
+        binding.dbDialogViewModel = viewModel
         dialogListener = activity as DialogListener
     }
 
@@ -53,7 +53,7 @@ class DbDialogFragment(private var dbInfo: DbDialogViewModel.DBInfo) : DialogFra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val sharedPref = this.activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        dialog_toolbar!!.run {
+        db_dialog_toolbar!!.run {
             inflateMenu(R.menu.menu_add_db_fragment)
             setNavigationOnClickListener { dismiss() }
             setOnMenuItemClickListener {

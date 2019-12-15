@@ -5,8 +5,9 @@
     <data>
 
         <variable
-            name="adbViewModel"
+            name="dbDialogViewModel"
             type="com.dd.mdbc.ui.main.DbDialogViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_db_dialog"
+            app:layout_constraintTop_toBottomOf="@+id/db_dialog_appbar"
             app:layout_constraintVertical_chainStyle="packed">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -34,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:text="@={adbViewModel.dbInfo.dbName}" />
+                android:text="@={dbDialogViewModel.dbInfo.dbName}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,16 +59,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:text="@={adbViewModel.dbInfo.connectionURI}" />
+                android:text="@={dbDialogViewModel.dbInfo.connectionURI}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <include
-            android:id="@+id/add_db_dialog"
-            layout="@layout/dialog_toolbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/db_dialog_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/db_dialog_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:paddingStart="@dimen/spacing_small"
+                android:paddingEnd="@dimen/spacing_medium"
+                app:navigationIcon="@drawable/ic_close_dialog"
+                app:title="@string/db_dialog_title" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

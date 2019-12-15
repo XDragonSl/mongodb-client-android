@@ -1,4 +1,4 @@
-package com.dd.mdbc
+package com.dd.mdbc.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.dd.mdbc.R
 
-class DbAdapter(
-    private val dbs: List<Pair<String, Any?>>,
+class CollectionAdapter(
+    private val collections: List<String>,
     private val rowLayout: Int,
     val context: Context
-) : RecyclerView.Adapter<DbAdapter.DBViewHolder>() {
+) : RecyclerView.Adapter<CollectionAdapter.DBViewHolder>() {
 
     class DBViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.title)
@@ -23,11 +24,11 @@ class DbAdapter(
     }
 
     override fun onBindViewHolder(holder: DBViewHolder, position: Int) {
-        holder.title.text = dbs[position].first.toString()
+        holder.title.text = collections[position]
     }
 
     override fun getItemCount(): Int {
-        return dbs.size
+        return collections.size
     }
 
 }
