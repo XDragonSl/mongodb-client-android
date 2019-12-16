@@ -1,14 +1,19 @@
 package com.dd.mdbc.ui.main
 
-import androidx.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dd.mdbc.adapters.DbAdapter
 import com.dd.mdbc.R
+import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.progress_indicator.*
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), DbDialogFragment.Companion.DialogListener {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -26,7 +31,25 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+        recycler_view.layoutManager = LinearLayoutManager(activity)
     }
 
+    override fun onResume() {
+        loadDBs()
+        super.onResume()
+    }
+
+    override fun onDialogDismissed() {
+        loadDBs()
+    }
+
+    private fun loadDBs() {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        progress_indicator.visibility = View.INVISIBLE
+        recycler_view.adapter = DbAdapter(
+            sharedPref.all.toList(),
+            R.layout.db_item,
+            context!!
+        )
+    }
 }

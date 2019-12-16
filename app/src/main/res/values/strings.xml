@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">MongoDB Client</string>
+    <string name="app_name" translatable="false">MongoDB Client</string>
+    <string name="db_name_placeholder" translatable="true">DB name</string>
+    <string name="connection_placeholder" translatable="true">Connection URI</string>
+    <string name="action_confirm">Add</string>
+    <string name="db_dialog_title">DB connection</string>
+    <string name="edit_button">Edit</string>
+    <string name="remove_button">Remove</string>
+    <string name="confirm_title">Remove DB</string>
+    <string name="confirm_message">Are you sure?</string>
+    <string name="confirm_ok" translatable="false">OK</string>
+    <string name="confirm_cancel">Cancel</string>
+    <string name="error">Something went wrong…</string>
 </resources>
