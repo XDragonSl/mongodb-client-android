@@ -8,14 +8,15 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface CollectionService {
+interface DocumentService {
 
     @FormUrlEncoded
-    @POST("collections")
-    fun load(@Field("uri") uri: String): Observable<List<String>>
+    @POST("documents")
+    fun load(@Field("uri") uri: String,
+             @Field("collection") collection: String): Observable<List<Any>>
 
     companion object Factory {
-        fun create(): CollectionService {
+        fun create(): DocumentService {
             val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -23,7 +24,7 @@ interface CollectionService {
                 .baseUrl("https://mongodb-client-api.herokuapp.com/")
                 .build()
 
-            return retrofit.create(CollectionService::class.java);
+            return retrofit.create(DocumentService::class.java);
         }
     }
 }

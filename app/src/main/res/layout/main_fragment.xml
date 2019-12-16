@@ -13,10 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/AppTheme"
         app:title="@string/app_name" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -46,6 +46,6 @@
         app:srcCompat="@drawable/ic_add_button"
         tools:ignore="OnClick" />
 
-    <include layout="@layout/progress_indicator"/>
+    <include layout="@layout/progress_indicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

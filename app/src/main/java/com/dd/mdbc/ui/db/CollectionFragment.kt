@@ -9,55 +9,55 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dd.mdbc.R
-import com.dd.mdbc.adapters.CollectionAdapter
-import com.dd.mdbc.databinding.DbFragmentBinding
-import com.dd.mdbc.services.CollectionService
+import com.dd.mdbc.adapters.DocumentAdapter
+import com.dd.mdbc.databinding.CollectionFragmentBinding
+import com.dd.mdbc.services.DocumentService
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.db_fragment.*
+import kotlinx.android.synthetic.main.collection_fragment.*
 import kotlinx.android.synthetic.main.progress_indicator.*
 
-class DbFragment(private var name: String, private var uri: String) : Fragment() {
+class CollectionFragment(private var db: String, private var collection: String, private var uri: String) : Fragment() {
 
     companion object {
-        fun newInstance(name: String, uri: String) = DbFragment(name, uri)
+        fun newInstance(db: String, collection: String, uri: String) = CollectionFragment(db, collection, uri)
     }
 
-    private lateinit var viewModel: DbViewModel
-    private lateinit var binding: DbFragmentBinding
+    private lateinit var viewModel: CollectionViewModel
+    private lateinit var binding: CollectionFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.db_fragment, container, false)
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.collection_fragment, container, false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(DbViewModel::class.java)
-        viewModel.title = name
-        binding.dbViewModel = viewModel
+        viewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
+        binding.collectionViewModel = viewModel
+        viewModel.title = "$db: $collection"
         recycler_view.layoutManager = LinearLayoutManager(activity)
     }
 
     override fun onResume() {
-        loadCollections()
+        loadDocuments()
         super.onResume()
     }
 
-    private fun loadCollections() {
-        val collectionService = CollectionService.create()
-        collectionService.load(uri)
+    private fun loadDocuments() {
+        val apiService = DocumentService.create()
+        apiService.load(uri, collection)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({ result ->
                 progress_indicator.visibility = View.INVISIBLE
-                recycler_view.adapter = CollectionAdapter(
+                recycler_view.adapter = DocumentAdapter(
                     result,
-                    R.layout.collection_item,
+                    R.layout.document_item,
                     context!!
                 )
             }, {

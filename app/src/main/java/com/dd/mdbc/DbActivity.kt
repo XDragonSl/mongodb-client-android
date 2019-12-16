@@ -3,7 +3,9 @@ package com.dd.mdbc
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.dd.mdbc.ui.db.CollectionFragment
 import com.dd.mdbc.ui.db.DbFragment
+import kotlinx.android.synthetic.main.collection_item.view.*
 
 class DbActivity : AppCompatActivity() {
 
@@ -25,7 +27,17 @@ class DbActivity : AppCompatActivity() {
 
     fun onClick(view: View) {
         when (view.id) {
-            R.id.db_card -> {
+            R.id.collection_card -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.container,
+                        CollectionFragment.newInstance(
+                            intent.getStringExtra(DB_NAME)!!,
+                            view.title.text.toString(),
+                            intent.getStringExtra(CONNECTION_URI)!!
+                        )
+                    ).addToBackStack(null)
+                    .commit()
             }
         }
     }
